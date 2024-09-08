@@ -131,6 +131,7 @@
     <ClCompile Include="serial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="related.h" />
     <ClInclude Include="serial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
