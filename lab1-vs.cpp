@@ -1,8 +1,8 @@
-﻿
-#include <clocale> 
+﻿#include <clocale> 
 #include <iostream>
 #include <string>
-#include "serial.h"
+//#include "serial.h"
+#include "related.h";
 using namespace std;
 
 int TIME, last_time, elem_num = 0;
@@ -24,8 +24,9 @@ int main()
 	Queue <Detail> q;
 	do
 	{
-		std::cout << "Текущее время: " << TIME << std::endl;
-		std::cout << "last time: " << last_time << std::endl;
+		//std::cout << "Текущее время: " << TIME << std::endl;
+		//std::cout << "last time: " << last_time << std::endl;
+		//cout << "head = " << q.head << "tail = " << q.tail << endl;
 		std::cout << "___________________________________________" << std::endl
 			<< "Выберите действие: " << std::endl
 			<< "1. Постановка детали на обработку" << std::endl
@@ -51,7 +52,7 @@ int main()
 						cout << "Очередь полна!";
 					};
 
-					cout << "head = " << q.head << "tail = " << q.tail;
+					//cout << "head = " << q.head << "tail = " << q.tail;
 
 					break;
 				}
@@ -100,9 +101,10 @@ int main()
 					}
 					else {
 						elem_num = q.ElemCount();
+						//cout << "Количество элементов: " << elem_num;
 						for (int i = 0; i < elem_num; i++) {
 							q.getDetail(detail, i);
-							cout << " <- " << detail.kod << endl;
+							cout << " <- " << detail.kod;
 						}
 					}
 
@@ -115,7 +117,7 @@ int main()
 					break;
 				}
 				default:
-					cout << "Ошибка! Попробуйте ввести другое число." << endl;
+					cout << "Ошибка! Нет такого пункта меню" << endl;
 				}
 			} while (true);
 

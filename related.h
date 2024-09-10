@@ -9,24 +9,37 @@ class Queue
 private:
 	struct Elem {
 		ElType detail;
-		ElType* next;
+		Elem* next = NULL;
 	};
+
+public:
 
 	Elem* head;
 	Elem* tail;
-	
-public:
 
 	Queue() {
 		head = tail = NULL;
 	}
 
 	void InitQueue() {
-		head = tail = 0;
+		if (!Empty()) {
+			Elem* ptr = head;
+			Elem* temp = NULL;
+
+			while (ptr != NULL) {
+				temp = ptr;
+				ptr = ptr->next;
+				delete temp;
+			}
+		}
+		else {
+			head = NULL;
+			tail = NULL;
+		}
 	}
 
 	bool Empty() {
-		if (head == tail == NULL) {
+		if (head == NULL && tail == NULL) {
 			return true;
 		}
 		else {
@@ -35,33 +48,41 @@ public:
 	}
 
 	bool Dequeue(ElType x) {
+		Elem* temp = NULL;
 		if (Empty()) {
 			return false;
 		}
-		else {
-			head = (head + 1) % NumElem;
-			return true;
-		}
-	}
-
-	bool Enqueue(ElType x) {
-		if (Empty()) {
-			return false;
-		}
-		else if (Empty()) {
-			details[head] = x;
-			tail = (tail + 1) % NumElem;
+		else if (head == tail) {
+			delete head;
+			head = NULL;
+			tail = NULL;
 		}
 		else {
-			details[tail] = x;
-			//tail = (tail % (NumElem - 1)) + 1;
-			tail = (tail + 1) % NumElem;
-
+			temp = head;
+			head = head->next;
+			delete temp;
 		}
 
 		return true;
 	}
 
+	bool Enqueue(ElType x) {
+
+		Elem* element = new Elem;
+		element->detail = x;
+
+		if (Empty()) {
+			element->next = NULL;
+			head = tail = element;
+		}
+		else {
+			tail->next = element;
+			tail = element;
+		}
+
+		return true;
+	}
+	/*
 	bool ShowQueue() {
 		if (Empty()) {
 			return false;
@@ -77,8 +98,7 @@ public:
 		}
 		return true;
 	}
-
-
+	*/
 
 	int ElemCount() {
 
@@ -87,31 +107,37 @@ public:
 		}
 
 		int count = 0;
-		int ptr = head;
+		Elem* ptr = head;
 
-		while (ptr != tail) {
-			ptr = (ptr + 1) % NumElem;
+		while (ptr != NULL) {
+			ptr = ptr->next;
 			count++;
 		}
 
 		return count;
 	}
-
+	
 	bool getDetail(ElType& x) {
 		if (Empty()) {
 			return false;
 		}
-
-		x = details[head];
+		x = head->detail;
 		return true;
 	}
-
+	
 	bool getDetail(ElType& x, int offset) {
 
-		int ptr = (head + offset) % NumElem;
-		x = details[ptr];
+		Elem* ptr;
+		ptr = head;
+
+		while (offset != 0) {
+			ptr = ptr->next;
+			offset--;
+		}
+		
+		x = ptr->detail;
 
 		return true;
 	}
-
+	
 };
