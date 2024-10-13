@@ -84,23 +84,6 @@ public:
 
 		return true;
 	}
-	/*
-	bool ShowQueue() {
-		if (Empty()) {
-			return false;
-		}
-		else {
-			ptr = head;
-			while (ptr != tail) {
-				//cout << " -> " << details[ptr];
-				cout << " -> " << details[ptr].kod;
-				ptr = (ptr + 1) % NumElem;
-			}
-
-		}
-		return true;
-	}
-	*/
 
 	int ElemCount() {
 
