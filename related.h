@@ -36,6 +36,8 @@ public:
 			head = NULL;
 			tail = NULL;
 		}
+		head = NULL;
+		tail = NULL;
 	}
 
 	bool Empty() {

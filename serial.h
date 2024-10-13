@@ -84,8 +84,6 @@ public:
 		return true;
 	}
 
-
-
 	int ElemCount() {
 
 		if (Empty()) {

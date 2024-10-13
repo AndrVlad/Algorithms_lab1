@@ -1,8 +1,8 @@
 ﻿#include <clocale> 
 #include <iostream>
 #include <string>
-//#include "serial.h"
-#include "related.h";
+#include "serial.h"
+//#include "related.h";
 using namespace std;
 
 int TIME, last_time, elem_num = 0;
@@ -89,7 +89,7 @@ int main()
 					}
 					else {
 						TIME = last_time = 0;
-						cout << "Отказ установки! " << " Деталь " << detail.kod << " была снята" << endl;
+						cout << "Отказ установки! " << " Деталь была снята" << endl;
 					}
 
 					break;
