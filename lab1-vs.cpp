@@ -31,6 +31,8 @@ int main()
 			<< "4. Вывод списка обрабатываемых деталей в порядке очереди " << std::endl
 			<< "5. Сброс процесса моделирования" << std::endl
 			<< "______________________________________________" << std::endl;
+		std::cout << "tail = " << q.tail << std::endl;
+		std::cout << "head = " << q.head << std::endl;
 		std::cin >> choose;
 				switch (choose)
 				{

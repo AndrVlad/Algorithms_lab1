@@ -60,7 +60,6 @@ public:
 		}
 		else {
 			details[tail] = x;
-			//tail = (tail % (NumElem - 1)) + 1;
 			tail = (tail + 1) % NumElem;
 
 		}
