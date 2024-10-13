@@ -1,8 +1,8 @@
 ﻿#include <clocale> 
 #include <iostream>
 #include <string>
-#include "serial.h"
-//#include "related.h";
+//#include "serial.h"
+#include "related.h";
 using namespace std;
 
 int TIME, last_time, elem_num = 0;
@@ -34,79 +34,89 @@ int main()
 		std::cout << "tail = " << q.tail << std::endl;
 		std::cout << "head = " << q.head << std::endl;
 		std::cin >> choose;
-				switch (choose)
-				{
-				case 1:
-				{
-					cout << "Введите код детали и время её обработки" << endl;
 
-					cin >> detail.kod >> detail.time;
+		switch (choose)
+		{
+		case 1:
+		{
+			cout << "Введите код детали и время её обработки" << endl;
 
-					try {
-						q.Enqueue(detail);
-					}
-					catch(const char* error_message){
-						cout << error_message << endl;
-					};
+			cin >> detail.kod >> detail.time;
 
-					break;
+			try {
+				q.Enqueue(detail);
+			}
+			catch(const char* error_message) {
+				cout << error_message << endl;
+			};
+
+			break;
+		}
+		case 2:
+		{
+			TIME++;
+				
+			try {
+				q.getDetail(detail);
+
+				if (TIME == (detail.time + last_time)) {
+					q.Dequeue(detail);
+					last_time += detail.time;
+					cout << "Деталь " << detail.kod << " была обработана" << endl;
 				}
-				case 2:
-				{
-					TIME++;
-					
-					if (q.getDetail(detail)) {
+			}
+			catch(const char* error_message) {
+				last_time = TIME;
+			}
 						
-						if (TIME == (detail.time + last_time)) {
-							q.Dequeue(detail);
-							last_time += detail.time;
-							cout << "Деталь " << detail.kod << " была обработана" << endl;
-						}
-					}
-					else {
-						last_time = TIME;
-					}
+			break;
+		}
+		case 3:
+		{
+			try
+			{
+				q.Dequeue(detail);
+			}
+			catch (const char* error_message)
+			{
+				cout << error_message << endl;
+				break;
+			}
+					
+			TIME = last_time = 0;
+			cout << "Отказ установки! " << " Деталь была снята" << endl;
 
-					break;
-				}
-				case 3:
-				{
-					if (!(q.Dequeue(detail))) {
-						cout << "Очередь пуста!" << endl;
-					}
-					else {
-						TIME = last_time = 0;
-						cout << "Отказ установки! " << " Деталь была снята" << endl;
-					}
+			break;
+		}
+		case 4:
+		{
+			try {
+				q.ElemCount();
+			}
+			catch(const char* error_message) {
+				cout << error_message << endl;
+				break;
+			}
+					
+			elem_num = q.ElemCount();
 
-					break;
-				}
-				case 4:
-				{
-					if (!(q.ElemCount())) {
-						cout << "Очередь пуста!" << endl;
-					}
-					else {
-						elem_num = q.ElemCount();
+			for (int i = 0; i < elem_num; i++) {
+				q.getDetail(detail, i);
+				cout << " <- " << detail.kod;
+			}
 
-						for (int i = 0; i < elem_num; i++) {
-							q.getDetail(detail, i);
-							cout << " <- " << detail.kod;
-						}
-					}
-
-					break;
-				}
-				case 5:
-				{
-					TIME = last_time = 0;
-					q.InitQueue();
-					break;
-				}
-				default:
-					cout << "Ошибка! Нет такого пункта меню" << endl;
-				}
-			} while (true);
+			break;
+		}
+		case 5:
+		{
+			TIME = last_time = 0;
+			q.InitQueue();
+			break;
+		}
+		default:
+			cout << "Ошибка! Нет такого пункта меню" << endl;
+		}
+	} while (true);
 
 	return 0;
 }

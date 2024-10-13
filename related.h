@@ -49,10 +49,10 @@ public:
 		}
 	}
 
-	bool Dequeue(ElType x) {
+	void Dequeue(ElType x) {
 		Elem* temp = NULL;
 		if (Empty()) {
-			return false;
+			throw "Очередь пуста!";
 		}
 		else if (head == tail) {
 			delete head;
@@ -64,8 +64,6 @@ public:
 			head = head->next;
 			delete temp;
 		}
-
-		return true;
 	}
 
 	void Enqueue(ElType x) {
@@ -86,7 +84,7 @@ public:
 	int ElemCount() {
 
 		if (Empty()) {
-			return false;
+			throw "Очередь пуста";
 		}
 
 		int count = 0;

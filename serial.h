@@ -40,17 +40,15 @@ public:
 		}
 	}
 
-	bool Dequeue(ElType x) {
+	void Dequeue(ElType x) {
 		if (Empty()) {
-			return false;
+			throw "Очередь пуста!";
 		}
 		else {
 			head = (head + 1) % NumElem;
-			return true;
 		}
 	}
 
-	
 	void Enqueue(ElType x) {
 		if (Full()) {
 			throw "Очередь полна!";
@@ -69,7 +67,7 @@ public:
 	int ElemCount() {
 
 		if (Empty()) {
-			return false;
+			throw "Очередь пуста";
 		}
 
 		int count = 0;
@@ -85,7 +83,7 @@ public:
 
 	void getDetail(ElType &x) {
 		if (Empty()) {
-			throw "Очередь полна!";
+			throw "Очередь пуста!";
 		}
 		x = details[head];
 	}
