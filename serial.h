@@ -50,9 +50,10 @@ public:
 		}
 	}
 
-	bool Enqueue(ElType x) {
+	
+	void Enqueue(ElType x) {
 		if (Full()) {
-			return false;
+			throw "Очередь полна!";
 		}
 		else if (Empty()) {
 			details[head] = x;
@@ -63,8 +64,6 @@ public:
 			tail = (tail + 1) % NumElem;
 
 		}
-
-		return true;
 	}
 
 	int ElemCount() {
@@ -84,13 +83,11 @@ public:
 		return count;
 	}
 
-	bool getDetail(ElType &x) {
+	void getDetail(ElType &x) {
 		if (Empty()) {
-			return false;
+			throw "Очередь полна!";
 		}
-
 		x = details[head];
-		return true;
 	}
 
 	bool getDetail(ElType& x, int offset) {

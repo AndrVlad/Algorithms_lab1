@@ -42,11 +42,11 @@ int main()
 
 					cin >> detail.kod >> detail.time;
 
-					if (q.Enqueue(detail)) {
-						cout << "Деталь добавлена";
+					try {
+						q.Enqueue(detail);
 					}
-					else {
-						cout << "Очередь полна!";
+					catch(const char* error_message){
+						cout << error_message << endl;
 					};
 
 					break;

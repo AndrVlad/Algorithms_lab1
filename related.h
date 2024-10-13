@@ -68,7 +68,7 @@ public:
 		return true;
 	}
 
-	bool Enqueue(ElType x) {
+	void Enqueue(ElType x) {
 
 		Elem* element = new Elem;
 		element->detail = x;
@@ -81,8 +81,6 @@ public:
 			tail->next = element;
 			tail = element;
 		}
-
-		return true;
 	}
 
 	int ElemCount() {
@@ -102,12 +100,11 @@ public:
 		return count;
 	}
 	
-	bool getDetail(ElType& x) {
+	void getDetail(ElType& x) {
 		if (Empty()) {
-			return false;
+			throw "Очередь полна!";
 		}
 		x = head->detail;
-		return true;
 	}
 	
 	bool getDetail(ElType& x, int offset) {
