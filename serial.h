@@ -88,12 +88,10 @@ public:
 		x = details[head];
 	}
 
-	bool getDetail(ElType& x, int offset) {
+	void getDetail(ElType& x, int offset) {
 			
 		int ptr = (head + offset) % NumElem;
 		x = details[ptr];
-
-		return true;
 	}
 
 };
