@@ -1,8 +1,8 @@
 ﻿#include <clocale> 
 #include <iostream>
 #include <string>
-//#include "serial.h"
-#include "related.h";
+#include "serial.h"
+//#include "related.h";
 using namespace std;
 
 int TIME, last_time, elem_num = 0;
@@ -14,7 +14,7 @@ struct Detail
 };
 
 int main()
-{	
+{
 	setlocale(LC_ALL, "");
 	Detail detail;
 	int detal = 0;
@@ -31,8 +31,7 @@ int main()
 			<< "4. Вывод списка обрабатываемых деталей в порядке очереди " << std::endl
 			<< "5. Сброс процесса моделирования" << std::endl
 			<< "______________________________________________" << std::endl;
-		std::cout << "tail = " << q.tail << std::endl;
-		std::cout << "head = " << q.head << std::endl;
+
 		std::cin >> choose;
 
 		switch (choose)
@@ -46,7 +45,7 @@ int main()
 			try {
 				q.Enqueue(detail);
 			}
-			catch(const char* error_message) {
+			catch (const char* error_message) {
 				cout << error_message << endl;
 			};
 
@@ -55,34 +54,34 @@ int main()
 		case 2:
 		{
 			TIME++;
-				
+
 			try {
 				q.getDetail(detail);
 
 				if (TIME == (detail.time + last_time)) {
-					q.Dequeue(detail);
+					q.Dequeue();
 					last_time += detail.time;
 					cout << "Деталь " << detail.kod << " была обработана" << endl;
 				}
 			}
-			catch(const char* error_message) {
+			catch (const char* error_message) {
 				last_time = TIME;
 			}
-						
+
 			break;
 		}
 		case 3:
 		{
 			try
 			{
-				q.Dequeue(detail);
+				q.Dequeue();
 			}
 			catch (const char* error_message)
 			{
 				cout << error_message << endl;
 				break;
 			}
-					
+
 			TIME = last_time = 0;
 			cout << "Отказ установки! " << " Деталь была снята" << endl;
 
@@ -90,14 +89,12 @@ int main()
 		}
 		case 4:
 		{
-			try {
-				q.ElemCount();
-			}
-			catch(const char* error_message) {
-				cout << error_message << endl;
+
+			if (q.ElemCount() == 0) {
+				cout << "Количество элементов 0!";
 				break;
 			}
-					
+
 			elem_num = q.ElemCount();
 
 			for (int i = 0; i < elem_num; i++) {
