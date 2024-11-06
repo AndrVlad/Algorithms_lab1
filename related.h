@@ -32,10 +32,7 @@ public:
 				delete temp;
 			}
 		}
-		else {
-			head = NULL;
-			tail = NULL;
-		}
+
 		head = NULL;
 		tail = NULL;
 	}
@@ -49,10 +46,10 @@ public:
 		}
 	}
 
-	bool Dequeue(ElType x) {
+	void Dequeue() {
 		Elem* temp = NULL;
 		if (Empty()) {
-			return false;
+			throw "Î÷åğåäü ïóñòà!";
 		}
 		else if (head == tail) {
 			delete head;
@@ -64,11 +61,9 @@ public:
 			head = head->next;
 			delete temp;
 		}
-
-		return true;
 	}
 
-	bool Enqueue(ElType x) {
+	void Enqueue(ElType x) {
 
 		Elem* element = new Elem;
 		element->detail = x;
@@ -81,15 +76,9 @@ public:
 			tail->next = element;
 			tail = element;
 		}
-
-		return true;
 	}
 
 	int ElemCount() {
-
-		if (Empty()) {
-			return false;
-		}
 
 		int count = 0;
 		Elem* ptr = head;
@@ -101,16 +90,23 @@ public:
 
 		return count;
 	}
-	
-	bool getDetail(ElType& x) {
+
+	void getDetail(ElType& x) {
 		if (Empty()) {
-			return false;
+			throw "Î÷åğåäü ïóñòàÿ!";
 		}
 		x = head->detail;
-		return true;
 	}
-	
-	bool getDetail(ElType& x, int offset) {
+
+	void getDetail(ElType& x, int offset) {
+
+		if (Empty()) {
+			throw "Î÷åğåäü ïóñòàÿ!";
+		}
+
+		if (offset > ElemCount()) {
+			throw "Âûõîä çà äèàïàçîí çíà÷åíèé!";
+		}
 
 		Elem* ptr;
 		ptr = head;
@@ -119,10 +115,8 @@ public:
 			ptr = ptr->next;
 			offset--;
 		}
-		
-		x = ptr->detail;
 
-		return true;
+		x = ptr->detail;
 	}
-	
+
 };

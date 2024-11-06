@@ -32,7 +32,9 @@ public:
 	}
 
 	bool Full() {
-		if ((head == 0 && tail == NumElem - 1) || (tail == head - 1)) {
+
+		int temp = (tail + 1) % NumElem;
+		if (head == temp) {
 			return true;
 		}
 		else {
@@ -40,42 +42,30 @@ public:
 		}
 	}
 
-	bool Dequeue(ElType x) {
+	void Dequeue() {
 		if (Empty()) {
-			return false;
+			throw "Очередь пуста!";
 		}
 		else {
 			head = (head + 1) % NumElem;
-			return true;
 		}
 	}
 
-	bool Enqueue(ElType x) {
+	void Enqueue(ElType x) {
 		if (Full()) {
-			return false;
-		}
-		else if (Empty()) {
-			details[head] = x;
-			tail = (tail + 1) % NumElem;
+			throw "Очередь полна!";
 		}
 		else {
 			details[tail] = x;
 			tail = (tail + 1) % NumElem;
-
 		}
-
-		return true;
 	}
 
 	int ElemCount() {
 
-		if (Empty()) {
-			return false;
-		}
-
 		int count = 0;
 		int ptr = head;
-		
+
 		while (ptr != tail) {
 			ptr = (ptr + 1) % NumElem;
 			count++;
@@ -84,21 +74,25 @@ public:
 		return count;
 	}
 
-	bool getDetail(ElType &x) {
+	void getDetail(ElType& x) {
 		if (Empty()) {
-			return false;
+			throw "Очередь пуста!";
 		}
-
 		x = details[head];
-		return true;
 	}
 
-	bool getDetail(ElType& x, int offset) {
-			
+	void getDetail(ElType& x, int offset) {
+
+		if (Empty()) {
+			throw "Очередь пуста!";
+		}
+
+		if (offset > ElemCount()) {
+			throw "Выход за диапазон значений!";
+		}
+
 		int ptr = (head + offset) % NumElem;
 		x = details[ptr];
-
-		return true;
 	}
 
 };
